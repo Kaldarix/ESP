@@ -11,11 +11,14 @@ group.add_argument('-m', '--medium', action='store_true')
 args = parser.parse_args()
 
 if args.nano:
-    modelarg = "yolov8n-pose.pt"
+    modelarg = "DLMs/yolov8n-pose.pt"
+    modeltxt = "Nano"
 elif args.medium:
-    modelarg = "yolov8m-pose.pt"
+    modelarg = "DLMs/yolov8m-pose.pt"
+    modeltxt = "medium"
 else:
-    modelarg = "yolov8n-pose.pt"
+    modelarg = "DLMs/yolov8n-pose.pt"
+    modeltxt = "nano"
 
 model = YOLO(modelarg)
 cap = cv2.VideoCapture(0)
@@ -38,7 +41,7 @@ while True:
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
             cv2.putText(frame, f"Confidence: {conf:.2f}", (x1, y1-10),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
-    cv2.imshow("ESP", frame)
+    cv2.imshow("ESP " + modeltxt, frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 

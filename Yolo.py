@@ -6,7 +6,8 @@ parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group()
 group.add_argument('-n', '--nano', action='store_true')
 group.add_argument('-m', '--medium', action='store_true')
-# group.add_argument('-m', '--medium', action='store_true')
+group.add_argument('-s', '--small', action='store_true')
+
 
 args = parser.parse_args()
 
@@ -16,6 +17,9 @@ if args.nano:
 elif args.medium:
     modelarg = "DLMs/yolov8m-pose.pt"
     modeltxt = "medium"
+elif args.small:
+    modelarg = "DLMs/yolov8s-pose.pt"
+    modeltxt = "small"
 else:
     modelarg = "DLMs/yolov8n-pose.pt"
     modeltxt = "nano"
